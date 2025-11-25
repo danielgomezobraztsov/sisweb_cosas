@@ -24,7 +24,7 @@ async function resltadosF1() {
 
     console.log(standings);
   } catch (error) {
-    console.error('Error fetching F1 data:', error.message);
+    console.error('Error:', error.message);
   }
 }
 
