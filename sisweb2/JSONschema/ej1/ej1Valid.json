@@ -1,0 +1,10 @@
+{
+   "name":"The Anatomy Lesson",
+   "artist":"Rembrandt",
+   "dimension":{
+      "width":216.5,
+      "height":169.5
+   },
+   "description":"Clase de anatomia, lo pone en el titulo",
+   "tags":["oil","famous"]
+}
