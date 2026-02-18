@@ -1,0 +1,50 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema#",
+  "$id": "http://example.com/schemas/painting.schema.json",
+  "type": "object",
+  "title": "Peliculas",
+  "description": "Info de Peliculas",
+  "required": [
+    "nombre",
+    "descripcion",
+    "year",
+    "actores",
+    "director",
+    "score"
+  ],
+  "properties": {
+    "nombre": {
+      "type": "string",
+      "description": "Título de la película"
+    },
+    "descripcion": {
+      "type": "string",
+      "description": "Descripcion de la película"
+    },
+    "year": {
+      "type": "integer",
+      "maximum": 2026,
+      "description": "Año de estreno"
+    },
+    "actores": {
+      "type": "array",
+      "items": {
+        "type": "string"
+      },
+      "minItems": 1,
+      "description": "Lista de actores principales"
+    },
+    "director": {
+      "type": "string",
+      "minItems": 1,
+      "description": "Nombre del director"
+    },
+    "score": {
+      "type": "number",
+      "minimum": 0,
+      "maximum": 10,
+      "description": "Score de reviews"
+    }
+  }
+}
+
