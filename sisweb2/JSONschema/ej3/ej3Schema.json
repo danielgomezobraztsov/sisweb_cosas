@@ -35,9 +35,13 @@
       "minItems": 1,
       "description": "Lista de actores principales"
     },
-    "director": {
-      "type": "string",
+    "directores": {
+      "type": "array",
+      "uniqueItems": true,
       "minItems": 1,
+      "items": {
+        "type": "string"
+      },
       "description": "Nombre del director"
     },
     "score": {
