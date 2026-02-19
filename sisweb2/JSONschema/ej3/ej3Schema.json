@@ -1,6 +1,6 @@
 {
   "$schema": "https://json-schema.org/draft/2020-12/schema#",
-  "$id": "http://example.com/schemas/painting.schema.json",
+  "$id": "http://example.com/schemas/movie.schema.json",
   "type": "object",
   "title": "Peliculas",
   "description": "Info de Peliculas",
@@ -9,7 +9,7 @@
     "descripcion",
     "year",
     "actores",
-    "director",
+    "directores",
     "score"
   ],
   "properties": {
