@@ -1,0 +1,55 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema#",
+  "$id": "http://example.com/schemas/film.schema.json",
+  "title": "Film",
+  "description": "Film info",
+  "type": "object",
+  "properties":{
+    "title": {"type": "string"},
+    "sinopsis": {"type": "string"},
+    "year": {
+      "type": "integer",
+      "minimum": 1888},
+    "directors": {
+      "$ref": "#/$defs/personsArray"
+    },
+    "genres": {
+      "type": "array",
+      "items": {
+        "type": "string",
+        "enum": ["Action", "Sci-Fi"]
+      },
+      "minItems": 1,
+      "uniqueItems": true
+    },
+    "certification": {
+      "type": "string",
+      "enum": ["R","G","PG","PG-13","NC-17"]
+    },
+    "rating": {
+      "type": "number",
+      "minimum": 0,
+      "maximum": 10
+    },
+    "numRatings": {
+      "type": "integer",
+      "minimum": 0
+    },
+    "duration":  {
+      "type": "integer",
+      "minimum": 0
+    },
+    "stars":  {
+      "$ref": "#/$defs/personsArray"
+    }
+  },
+  "required": ["title", "year", "duration"],
+  "$defs":{
+    "personsArray": {
+      "type": "array",
+      "items": {"type": "string"},
+      "minItems": 1,
+      "uniqueItems": true
+    }
+  }
+}
