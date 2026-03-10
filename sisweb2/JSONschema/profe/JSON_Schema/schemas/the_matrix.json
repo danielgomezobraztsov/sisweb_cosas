@@ -1,0 +1,12 @@
+{
+  "title": "The Matrix",
+  "sinopsis": "When a beautiful stranger leads computer hacker Neo...",
+  "year": 1999,
+  "directors": ["Lana Wachowski", "Lilly Wachowski"],
+  "genres": ["Action", "Sci-Fi"],
+  "certification": "R",
+  "rating": 8.7,
+  "numRatings": 2200000,
+  "duration": 136,
+  "stars": ["Keanu Reeves", "Laurence Fishburne", "Carrie-Anne Moss"]
+}

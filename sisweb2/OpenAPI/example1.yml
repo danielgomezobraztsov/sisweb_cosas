@@ -1,0 +1,21 @@
+openapi: 3.1.0
+info:
+  title: A minimal OpenAPI document
+  version: 0.0.1
+  description: OpenAPI document example
+paths: 
+  /board:
+    get:
+      summary: Get the whole board
+      description: Retrieves the current state of the board and the winner.
+      responses:
+        "200":
+          description: "OK"
+          content:
+            application/json:
+              schema:
+                type: string
+                enum:
+                - Alice
+                - Bob
+                - Car

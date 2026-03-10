@@ -1,0 +1,54 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema#",
+  "$id": "http://example.com/schemas/squad.schema.json",
+  "title": "Squad",
+  "description": "Squad information",
+  "type": "object",
+  "properties":{
+    "squadName":{
+      "type": "string"
+    },
+    "homeTown":{
+      "type": "string"
+    },
+    "formed":{
+      "type": "integer"
+    },
+    "secretBase":{
+      "type": "string"
+    },
+    "active":{
+      "type": "boolean"
+    },
+    "members":{
+      "type": "array",
+      "uniqueItems": true,
+      "minItems": 1,
+      "items":{
+        "type":"object",
+        "properties":{
+          "name": {
+            "type": "string"
+          },
+          "age":{
+            "type": "integer",
+            "minimum": 0
+          },
+          "secretIdentity": {
+            "type": "string"
+          },
+          "powers":{
+            "type": "array",
+            "minItems": 1,
+            "uniqueItems": true,
+            "items":{
+              "type": "string"
+            }
+          }
+        },
+        "required": ["name", "powers"]
+      }
+    }
+  },
+  "required": ["squadName","members"]
+}

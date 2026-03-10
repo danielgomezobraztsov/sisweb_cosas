@@ -1,0 +1,10 @@
+{
+	"name": "Mona Lisa",
+	"artist": "Da Vincci",
+	"description": "¡Vaya cuadro!",
+	"dimension": {
+		"width": 12,
+		"height": 12
+	},
+	"tags": ["oil", "famous"]
+}

@@ -1,0 +1,14 @@
+openapi: 3.1.0
+info:
+  title: A minimal OpenAPI document
+  version: 0.0.1
+  description: OpenAPI document example
+paths:
+  /users/{id}:
+    get:
+      parameters:
+        - name: id
+          in: path
+          required: true
+          schema:
+            type: integer
