@@ -1,0 +1,265 @@
+openapi: 3.0.0
+info:
+  title: API Cine - Gestión de Películas y Sesiones
+  description: API REST para gestionar películas en cartelera y sus sesiones. Desarrollado para ejercicio OpenAPI.
+  version: 1.0.0
+  contact:
+    name: Dani Gomez
+    email: tu-email@example.com
+
+servers:
+  - url: http://localhost:8080
+    description: Servidor local para pruebas
+
+paths:
+  /api/peliculas:
+    get:
+      summary: Listar películas en cartelera
+      responses:
+        '200':
+          description: Lista de películas
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/Pelicula'
+    post:
+      summary: Crear película
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/PeliculaInput'
+            example:
+              titulo: "Dune: Parte Dos"
+              director: "Denis Villeneuve"
+              duracionMinutos: 166
+              genero: "Ciencia ficcion"
+              clasificacion: "12"
+      responses:
+        '201':
+          description: Película creada
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Pelicula'
+
+  /api/peliculas/{id}:
+    get:
+      summary: Ver detalle de película
+      parameters:
+        - name: id
+          in: path
+          required: true
+          schema:
+            type: integer
+      responses:
+        '200':
+          description: Detalle de película
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Pelicula'
+    put:
+      summary: Modificar película
+      parameters:
+        - name: id
+          in: path
+          required: true
+          schema:
+            type: integer
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/PeliculaInput'
+      responses:
+        '200':
+          description: Película modificada
+    delete:
+      summary: Eliminar película
+      parameters:
+        - name: id
+          in: path
+          required: true
+          schema:
+            type: integer
+      responses:
+        '204':
+          description: Película eliminada
+
+  /api/sesiones:
+    get:
+      summary: Listar sesiones (con filtros)
+      parameters:
+        - name: peliculaId
+          in: query
+          schema:
+            type: integer
+        - name: salaId
+          in: query
+          schema:
+            type: integer
+        - name: fecha
+          in: query
+          schema:
+            type: string
+            format: date
+      responses:
+        '200':
+          description: Lista de sesiones
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/Sesion'
+    post:
+      summary: Crear sesión
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/SesionInput'
+            example:
+              peliculaId: 101
+              salaId: 3
+              fecha: "2026-03-05"
+              hora: "20:30"
+              precio: 8
+      responses:
+        '201':
+          description: Sesión creada
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Sesion'
+
+  /api/sesiones/{id}:
+    get:
+      summary: Ver detalle de sesión
+      parameters:
+        - name: id
+          in: path
+          required: true
+          schema:
+            type: integer
+      responses:
+        '200':
+          description: Detalle de sesión
+    put:
+      summary: Cambiar sesión
+      parameters:
+        - name: id
+          in: path
+          required: true
+          schema:
+            type: integer
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/SesionInput'
+      responses:
+        '200':
+          description: Sesión modificada
+    delete:
+      summary: Borrar sesión
+      parameters:
+        - name: id
+          in: path
+          required: true
+          schema:
+            type: integer
+      responses:
+        '204':
+          description: Sesión borrada
+
+  /api/peliculas/{id}/sesiones:
+    get:
+      summary: Listar sesiones de una película
+      parameters:
+        - name: id
+          in: path
+          required: true
+          schema:
+            type: integer
+      responses:
+        '200':
+          description: Sesiones de la película
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/Sesion'
+
+components:
+  schemas:
+    Pelicula:
+      type: object
+      properties:
+        id:
+          type: integer
+          example: 101
+        titulo:
+          type: string
+          example: "Dune: Parte Dos"
+        director:
+          type: string
+          example: "Denis Villeneuve"
+        duracionMinutos:
+          type: integer
+          example: 166
+        genero:
+          type: string
+          example: "Ciencia ficcion"
+        clasificacion:
+          type: string
+          example: "12"
+    PeliculaInput:
+      type: object
+      required: [titulo, director, duracionMinutos, genero, clasificacion]
+      properties:
+        titulo: { type: string }
+        director: { type: string }
+        duracionMinutos: { type: integer, minimum: 1 }
+        genero: { type: string }
+        clasificacion: { type: string }
+    Sesion:
+      type: object
+      properties:
+        id:
+          type: integer
+          example: 1
+        peliculaId:
+          type: integer
+          example: 101
+        salaId:
+          type: integer
+          example: 3
+        fecha:
+          type: string
+          format: date
+          example: "2026-03-05"
+        hora:
+          type: string
+          example: "20:30"
+        precio:
+          type: number
+          format: float
+          example: 8.0
+    SesionInput:
+      type: object
+      required: [peliculaId, salaId, fecha, hora, precio]
+      properties:
+        peliculaId: { type: integer, minimum: 1 }
+        salaId: { type: integer, minimum: 1 }
+        fecha: { type: string, format: date }
+        hora: { type: string }
+        precio: { type: number, minimum: 0 }
