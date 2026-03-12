@@ -11,10 +11,10 @@ paths:
       summary: GET todas las sesiones
       description: GET todas las sesiones
       parameters:
-        - $ref: '#components/parameters/page'
-        - $ref: '#components/parameters/numElements'
-        - $ref: '#components/parameters/title'
-        - $ref: '#components/parameters/genero'
+        - $ref: '#/components/parameters/page'
+        - $ref: '#/components/parameters/numElements'
+        - $ref: '#/components/parameters/title'
+        - $ref: '#/components/parameters/genero'
       responses:
         "200":
           description: OK
@@ -78,7 +78,7 @@ paths:
   /sesiones/{id}:
     # parametros generales para la ruta
     parameters: 
-        - $ref: '#components/parameters/id'
+        - $ref: '#/components/parameters/id'
 
     get:
       summary: GET sesion
@@ -148,10 +148,10 @@ paths:
       summary: GET todas las peliculas
       description: GET todas las peliculas
       parameters:
-        - $ref: '#components/parameters/page'
-        - $ref: '#components/parameters/numElements'
-        - $ref: '#components/parameters/title'
-        - $ref: '#components/parameters/genero'
+        - $ref: '#/components/parameters/page'
+        - $ref: '#/components/parameters/numElements'
+        - $ref: '#/components/parameters/title'
+        - $ref: '#/components/parameters/genero'
       responses:
         "200":
           description: OK
@@ -169,7 +169,7 @@ paths:
   /peliculas/{id}:
     # parametros generales para la ruta
     parameters: 
-        - $ref: '#components/parameters/id'
+        - $ref: '#/components/parameters/id'
 
     get:
       summary: GET pelicula
@@ -180,7 +180,7 @@ paths:
           content:
             application/json:
               schema:
-                $ref: '#components/schemas/pelicula'
+                $ref: '#/components/schemas/pelicula'
         "404":
           description: id no encontrado
           content:
@@ -270,7 +270,7 @@ components:
         title:
           $ref: '#/components/schemas/title
         genero:
-          $ref: '#/components/schemas/genero
+          $ref: '#/components/schemas/genero'
 
 
         
