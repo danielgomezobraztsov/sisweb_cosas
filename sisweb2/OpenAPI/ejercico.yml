@@ -5,14 +5,88 @@ info:
   version: 0.1.0
 
 paths:
+
   /sesiones:
     get:
       summary: GET todas las sesiones
       description: GET todas las sesiones
       parameters:
         - in: query
-        - name: 
+          name: page
+          description: num de pagina
+          schema:
+            type: integer
+            default: 1
+          required: false
+        - in: query
+          name: numElements
+          description: num de elementos por pagina
+          schema:
+            type: integer
+            maximum: 50
+            default: 10
+          required: false
+        - in: query
+          name: titulo
+          description: titulo de la pelicula
+          schema:
+            type: string
+          required: false
+        - in: query
+          name: genero
+          description: genero de peliculas
+          schema:
+            type: string
+            enum: ["Acction", "Adventure","Sci-Fi", "Terror"]
+          required: false
+      responses:
+        "200":
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: ''
+        "422":
+          description: params incorrectos
+          content:
+            application/json:
+              schema:
+                $ref: ''
+
+    post:
+      summary: POST sesion
+      description: POST sesion
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: ''
+      responses:
+        "201":
+          description: Created
+          content:
+            application/json:
+              schema:
+                $ref: ''
+        "422":
+          description: Error de json schema
+          content:
+            application/json:
+              schema:
+                $ref: ''
+        "400":
+          description: formato incorrecto
+          content:
+            application/json:
+              schema:
+                $ref: ''
+
+
   
   /sesiones{id}:
     get:
       parameters: 
+        summary: POST sesion
+        description: POST sesion
+        
