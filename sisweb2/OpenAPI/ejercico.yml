@@ -11,34 +11,10 @@ paths:
       summary: GET todas las sesiones
       description: GET todas las sesiones
       parameters:
-        - in: query
-          name: page
-          description: num de pagina
-          schema:
-            type: integer
-            default: 1
-          required: false
-        - in: query
-          name: numElements
-          description: num de elementos por pagina
-          schema:
-            type: integer
-            maximum: 50
-            default: 10
-          required: false
-        - in: query
-          name: titulo
-          description: titulo de la pelicula
-          schema:
-            type: string
-          required: false
-        - in: query
-          name: genero
-          description: genero de peliculas
-          schema:
-            type: string
-            enum: ["Acction", "Adventure","Sci-Fi", "Terror"]
-          required: false
+        - $ref: '#components/parameters/page'
+        - $ref: '#components/parameters/numElements'
+        - $ref: '#components/parameters/title'
+        - $ref: '#components/parameters/genero'
       responses:
         "200":
           description: OK
@@ -81,12 +57,221 @@ paths:
             application/json:
               schema:
                 $ref: ''
-
+    delete:
+      summary: DELETE todas las sesiones
+      description: DELETE todas las sesiones
+      responses:
+        "201":
+          description: DELETED
+          content:
+            application/json:
+              schema:
+                $ref: ''
+        "403":
+          description: DENIED
+          content:
+            application/json:
+              schema:
+                $ref: ''
 
   
-  /sesiones{id}:
+  /sesiones/{id}:
+    # parametros generales para la ruta
+    parameters: 
+        - $ref: '#components/parameters/id'
+
     get:
-      parameters: 
-        summary: POST sesion
-        description: POST sesion
+      summary: GET sesion
+      description: GET sesion
+      responses:
+        "200":
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: ''
+        "404":
+          description: id no encontrado
+          content:
+            application/json:
+              schema:
+                $ref: ''
+
+    put:
+      summary: PUT para modificar sesion
+      description: PUT para modificar sesion
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: ''
+      responses:
+        "200":
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: ''
+        "404":
+          description: id no encontrado
+          content:
+            application/json:
+              schema:
+                $ref: ''
+        "422":
+          description: Error de json schema
+          content:
+            application/json:
+              schema:
+                $ref: ''
+
+    delete:
+      summary: DELETE una sesion
+      description: DELETE una sesion
+      responses:
+        "200":
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: ''
+        "404":
+          description: id no encontrado
+          content:
+            application/json:
+              schema:
+                $ref: ''
+
+  /peliculas:
+    get:
+      summary: GET todas las peliculas
+      description: GET todas las peliculas
+      parameters:
+        - $ref: '#components/parameters/page'
+        - $ref: '#components/parameters/numElements'
+        - $ref: '#components/parameters/title'
+        - $ref: '#components/parameters/genero'
+      responses:
+        "200":
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/peliculaMin'
+        "422":
+          description: params incorrectos
+          content:
+            application/json:
+              schema:
+                $ref: ''
+
+  /peliculas/{id}:
+    # parametros generales para la ruta
+    parameters: 
+        - $ref: '#components/parameters/id'
+
+    get:
+      summary: GET pelicula
+      description: GET pelicula
+      responses:
+        "200":
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#components/schemas/pelicula'
+        "404":
+          description: id no encontrado
+          content:
+            application/json:
+              schema:
+                $ref: ''
+
+        
+components:
+  parameters:
+    id:
+      name: id
+      in: path
+      required: true
+      schema:
+        $ref: '#/components/schemas/id'
+      description: Id generico # se podria separar para los de sala/sesion/pelicula
+
+    page:
+      in: query
+      name: page
+      description: num de pagina
+      schema:
+        type: integer
+        default: 1
+      required: false
+
+    numElements:
+      in: query
+      name: numElements
+      description: num de elementos por pagina
+      schema:
+        type: integer
+        maximum: 50
+        default: 10
+      required: false
+    
+    title:
+      in: query
+      name: titulo
+      description: titulo de la pelicula
+      schema:
+        $ref: '#/components/schemas/title'
+      required: false
+
+    genero:
+      in: query
+      name: genero
+      description: genero de peliculas
+      schema:
+        $ref: '#/components/schemas/genero'
+      required: false
+
+  schemas:
+    id:
+      type: integer
+    
+    title:
+      type: string
+
+    genero:
+      type: string
+      enum: ["Acction", "Adventure","Sci-Fi", "Terror"]
+
+    arrayPeliculas:
+      type: array
+      items:
+        $ref: '#/components/schemas/peliculaMin' # para que devuelva ver simplificada con el link a la pelicula
+
+    peliculaMin:
+      type: object
+      required: [id, title, year, genero]
+      properties:
+        id:
+          $ref: '#/components/schemas/id
+        title:
+          $ref: '#/components/schemas/title
+        genero:
+          $ref: '#/components/schemas/genero
+
+    pelicula:
+      type: object
+      required: [id, title, year, genero]
+      properties:
+        id:
+          $ref: '#/components/schemas/id
+        title:
+          $ref: '#/components/schemas/title
+        genero:
+          $ref: '#/components/schemas/genero
+
+
+        
         
