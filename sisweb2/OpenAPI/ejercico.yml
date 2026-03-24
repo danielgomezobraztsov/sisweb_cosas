@@ -255,20 +255,20 @@ components:
       required: [id, title, year, genero]
       properties:
         id:
-          $ref: '#/components/schemas/id
+          $ref: '#/components/schemas/id'
         title:
-          $ref: '#/components/schemas/title
+          $ref: '#/components/schemas/title'
         genero:
-          $ref: '#/components/schemas/genero
+          $ref: '#/components/schemas/genero'
 
     pelicula:
       type: object
       required: [id, title, year, genero]
       properties:
         id:
-          $ref: '#/components/schemas/id
+          $ref: '#/components/schemas/id'
         title:
-          $ref: '#/components/schemas/title
+          $ref: '#/components/schemas/title'
         genero:
           $ref: '#/components/schemas/genero'
 
