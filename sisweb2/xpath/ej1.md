@@ -4,6 +4,8 @@
 
 ```xpath
 /PLAY/ACT[TITLE='ACT II']/SCENE/TITLE/text()
+<!-- o -->
+/PLAY/ACT[2]/SCENE/TITLE/text()
 ```
 
 Resultado
@@ -38,36 +40,43 @@ Resultado
 
 ```xpath
 /PLAY/ACT[TITLE='ACT III']//SPEECH[SPEAKER='BERNARDO']
+<!-- si hablase -->
+(/PLAY/ACT[TITLE='ACT III']//SPEECH[SPEAKER='BERNARDO'])[2]
 ```
 
 Resultado: No habla en el acto 3 o he hecho algo mal.
+
 ---
 ### 5. Número de líneas de cada diálogo (speech)
 
 ```xpath
-
+//SPEECH/count(LINE)
 ```
 
 Resultado
 ```text
-
+1
+1
+1
+2
+...
 ```
 ---
 ### 6. Número de líneas del diálogo (speech) con más líneas
 
 ```xpath
-
+max(//SPEECH/count(LINE))
 ```
 
 Resultado
 ```text
-
+60
 ```
 ---
 ### 7. Todos los diálogos (speech) de la tercera PERSONA del primer PGROUP dentro de PERSONAE
 
 ```xpath
-
+//SPEECH/[SPEAKER=//PERSONAE/PGROUP[1]/PERSONA[3]]
 ```
 
 Resultado
